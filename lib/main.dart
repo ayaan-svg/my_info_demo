@@ -1,8 +1,15 @@
+// lib/main.dart
+
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'dart:io' show Platform;
-import 'database_helper.dart'; // Import the new DatabaseHelper
-import 'data.dart'; // Import the UserInfo data model
+
+// Import the new SplashScreen file
+import 'splashscreen.dart';
+
+// Import your other project files
+import 'database_helper.dart';
+import 'data.dart';
 import 'personal_tab.dart';
 import 'job_tab.dart';
 import 'time_off_tab.dart';
@@ -17,7 +24,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Explicitly initialize the database factory based on the platform.
-  // This is the key to solving the 'databaseFactory not initialized' error.
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
@@ -44,7 +50,8 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      // Set the initial home screen to the SplashScreen
+      home: const SplashScreen(),
     );
   }
 }
